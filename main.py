@@ -24,16 +24,23 @@ def extract_member_details(url):
 
 
 def extract_members():
-    response = get_request('https://www.taan.org.np/members')
-    xpath_expression = '/html/body/div[1]/div[2]/div/div/div[2]'
-    member_links = response.xpath(xpath_expression + '//a/@href')
+    alphabet = ['z', 'y', 'x', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                'u',
+                'v', 'w']
 
     member_details_list = []
 
-    for link in member_links:
-        if link.startswith('http'):
-            member_details = extract_member_details(link)
-            member_details_list.append(member_details)
+    for data in alphabet:
+
+        response = get_request(f'https://www.taan.org.np/members?l={data}')
+        xpath_expression = '/html/body/div[1]/div[2]/div/div/div[2]'
+        member_links = response.xpath(xpath_expression + '//a/@href')
+
+        for link in member_links:
+            if link.startswith('http'):
+                member_details = extract_member_details(link)
+                member_details_list.append(member_details)
+                save_to_json(member_details_list)
 
     return member_details_list
 
@@ -45,4 +52,3 @@ def save_to_json(member_details_list):
 
 if __name__ == "__main__":
     members = extract_members()
-    save_to_json(members)
