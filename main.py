@@ -24,9 +24,9 @@ def extract_member_details(url):
 
 
 def extract_members():
-    alphabet = ['z', 'y', 'x', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
                 'u',
-                'v', 'w']
+                'v', 'w', 'x', 'y', 'z']
 
     member_details_list = []
 
