@@ -1,12 +1,12 @@
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import openai
 import json
 
-load_dotenv()
+# load_dotenv()
 
 # Set the API key
-openai.api_key = os.getenv("OPENAI_KEY")
+openai.api_key = os.getenv("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")
 
 # Rest of your code
 personal_details = {
