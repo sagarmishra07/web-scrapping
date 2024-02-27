@@ -6,7 +6,7 @@ import json
 # load_dotenv()
 
 # Set the API key
-openai.api_key = os.getenv("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")
+openai.api_key = os.getenv("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")
 
 # Rest of your code
 personal_details = {
