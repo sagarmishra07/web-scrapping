@@ -16,29 +16,21 @@ from langchain.chains.question_answering import load_qa_chain
 if "GOOGLE_API_KEY" not in os.environ:
     os.environ["GOOGLE_API_KEY"] = getpass.getpass("AIzaSyCL6P36tSFVLCcEN5q_U-psAkiTmQODHJs")
 
-
-
-
 #
 #
 # question = "Tell me a short poem about snow?"
 #
 
-
 # # load pdf
 loader = PyPDFLoader("civil-code.pdf")
 pages = loader.load_and_split()
-
 
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
 context = "\n\n".join(str(p.page_content) for p in pages)
 texts = text_splitter.split_text(context)
 
 embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-
-
 llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature="0.5",convert_system_message_to_human=True)
-
 vector_index = Chroma.from_texts(texts, embeddings).as_retriever()
 
 # template
@@ -59,12 +51,10 @@ prompt = PromptTemplate(template = prompt_template, input_variables = ["context"
 question = 'loss or damage related laws in nepal ?'
 
 docs = vector_index.get_relevant_documents(question)
-print(docs)
 chain = load_qa_chain(llm, chain_type="stuff", prompt=prompt)
 
 response = chain(
     {"input_documents":docs, "question": question}
     , return_only_outputs=True)
-
 print(response)
 
